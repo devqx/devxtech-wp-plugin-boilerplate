@@ -1,12 +1,12 @@
 <?php 
 /**
- * Plugin Name: Auto Peer Donationg
+ * Plugin Name: Face Of Angels
  * Plugin URI: http://www.devstackng.com
- * Description: Automatic peer to peer Donation system 
+ * Description: Premium Wordpress Plugin For the Fangs site 
  * Version: 1.0.0
  * Author: Oluwaseun Paul 
  * Author URI: http://www.devstackng.com 
- * License: MIT 
+ * License: MIT
  */
 
  ob_start();
@@ -35,31 +35,47 @@ use app\Assets\Assets;
 add_action( 'init', 'init' );
 
 function init(){
+
+    //instantiate the pages class
     $pages = new Plugin_Pages();
+
+    //create the pages 
     $pages->create_pages();
 
-     $views = new View();
+    //instantiate the View Class
+    $views = new View();
 
+     //instantiate the Model Class
+    $model = new Model();
 
-      $model = new Model();
+    //instantiate the User Class
+    $users = new Users($model);
 
-     $users = new Users($model);
+    //instantiate the Utility Class
+    $util = new Util($views,$users);
 
-     $util = new Util($views,$users);
+    //instantiate the Registration  Class
+    $register = new Register($util,$model);
 
-
-     $register = new Register($util,$model);
-
-   
-
+    //instantiate the Shortcodes Class
     $shortcodes = new Plugin_Shortcodes($views,$register,$util,$model);
+
+    //load the shortcodes 
     $shortcodes->shortcodes();
 
+    //instantiate the Assets Class
     $assets = new Assets();
+
+    //load all the assets
     $assets->load_assets();
 
+    //instantiate the Hooks Class
     $hooks = new Hooks($assets, $model);
+
+    //load all actions 
     $hooks->add_actions();
+
+    //apply all filters 
     $hooks->add_filters();
 
 
@@ -68,14 +84,22 @@ function init(){
 
 function activate(){
 
+    //instantiate the Model Class
     $model = new Model();
 
+    // //instantiate the Activate Class and inject the Model class as a dependency 
     $activator = new Activate($model);
+
+    //load the activate method
     $activator->activate();
 }
 
 function deactivate(){
+
+    //instantiate the Deactivate Class
     $deactivator = new Deactivate();
+
+    //load the deactivate method
     $deactivator->deactivate();
 
 }

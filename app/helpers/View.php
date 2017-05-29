@@ -24,9 +24,6 @@ class View {
         }
     }
 
-    public function load_sample(){
-        $this->load_view('member_register');
-    }
 
 }
 

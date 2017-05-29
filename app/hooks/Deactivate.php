@@ -16,9 +16,9 @@ class Deactivate {
     public function deactivate(){
 
         //delete the created pages 
-        $all_pages = get_option('peer_pages', false);
+        $fange_pages = get_option('fang_pages', false);
 
-        foreach($all_pages as $pages){
+        foreach($fange_pages as $pages){
             wp_delete_post($pages);
         }
     

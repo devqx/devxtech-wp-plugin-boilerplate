@@ -1,5 +1,5 @@
-{   "name":"Mponzi",
-    "description": "A wordpress ponzi plugin",
+{   "name":"Fangs",
+    "description": "A Custom Wordpress Plugin For Fangs Site",
     "autoload": {
         "psr-4": {
             "app\\": "app/"    

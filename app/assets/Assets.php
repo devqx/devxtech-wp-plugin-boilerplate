@@ -37,7 +37,7 @@ namespace app\assets;
 
      public function add_scripts(){
     
-    $this->scripts = $this->add($this->scripts,'mponzi_js', plugin_dir_url( dirname(__FILE__) ).'assets/js/mponzi.js', array("jquery"), '1.0', true );
+    $this->scripts = $this->add($this->scripts,'fangs_js', plugin_dir_url( dirname(__FILE__) ).'assets/js/fangs.js', array("jquery"), '1.0', true );
   
         
      }
@@ -59,6 +59,7 @@ namespace app\assets;
      public function load_assets(){
         
         $this->add_scripts();
+        
         //load all the styles 
          //foreach(styles as $style){
              //wp_enqueue_style($style['handle'], $style['src'], $style['deps'], $style['media']);

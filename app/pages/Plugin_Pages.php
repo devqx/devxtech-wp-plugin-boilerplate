@@ -38,29 +38,17 @@ class Plugin_Pages {
     public function the_pages(){
 
         $this->page_definitions = array(
+
             'Registration'=>array(
-                'title'=>'New Member Registration',
-                'content'=>'[new-member-register]'
+                'title'=>'Sign Up',
+                'content'=>'[fang-user-register]'
             ),
+
             'Login'=>array(
-                'title'=>'Member Login',
-                'content'=>'[member-login]'
+                'title'=>'Login',
+                'content'=>'[fang-user-login]'
             ),
-            'Member Dashboard'=>array(
-                'title'=>'Your Dashboard',
-                'content'=>'[member-dashboard]'
-            ),
-
-             'Payment Page'=>array(
-                'title'=>'Payment Page',
-                'content'=>'[payment-page]'
-            ),
-
-              'Admin Add Receiver'=>array(
-                'title'=>'Add A Receiver',
-                'content'=>'[admin-add-receiver]'
-            ),
-
+        
             
         );
 
@@ -89,7 +77,7 @@ class Plugin_Pages {
             ));
             $peer_pages_ids[] = $this->page_id;
 
-            update_option( 'peer_pages', $peer_pages_ids);
+            update_option( 'fang_pages', $peer_pages_ids);
         }
 
         }

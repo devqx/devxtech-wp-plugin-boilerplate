@@ -21,9 +21,7 @@ namespace app\auth;
     /**
     *@var $db_save , response from the database;
     */
-     private $save_users;
-
-     private $save_donators;
+     private $user;
 
     /**
     *@var $user_data , array of users information to insert the user into wordpress db
@@ -58,7 +56,9 @@ public function __construct($util, $model){
     $this->model = $model;
 }
 
-public function register($table_name,$payment_status){
+public function register(){
+
+    $fang_users_tbl = $this->model->fang_users;
 
     if(isset($_POST['submit']) && !empty($_POST['submit'])){
         foreach($_POST as $key=>$val){
@@ -98,8 +98,8 @@ public function register($table_name,$payment_status){
          date_default_timezone_set('Africa/Lagos');
 
         //save the incoming donator
-        $this->save_donators = $wpdb->insert(
-         $table_name, array(
+        $this->user = $wpdb->insert(
+         $fang_users_tbl, array(
             'full_name'=>$this->request['full_name'],
             'email'=>$this->request['email'],
             'user_login'=>$this->request['username'],
@@ -114,31 +114,6 @@ public function register($table_name,$payment_status){
         
         );
 
-        //save the user to the general users table 
-         $this->save_users = $wpdb->insert(
-
-         $this->model->mponzi_users, array(
-            'full_name'=>$this->request['full_name'],
-            'email'=>$this->request['email'],
-            'user_login'=>$this->request['username'],
-            'user_pwd'=>$this->request['password'],
-            'account_name'=>$this->request['account_name'],
-            'account_number'=>$this->request['account_number'],
-            'bank_name'=>$this->request['bank_name'],
-            'phone_number'=>$this->request['phone_number'],
-            'role'=>$role,
-            'payment_status'=>$payment_status
-
-         )
-        
-        );
-
-        if(!session_id()){
-            session_start();
-
-        }
-
-        $_SESSION['cur_donator'] = $this->request['username'];
       
         $success_url = home_url('payment-page');
         $this->redirect_url = add_query_arg('Register', 'successful', $success_url);
